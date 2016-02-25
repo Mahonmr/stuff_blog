@@ -1,7 +1,15 @@
 <div class="container">
-  <h2>The real index page</h2>
+  <ul>
+    {{#if model}}
+      {{#each model as |blog|}}
+        <li>{{blog.content}}</li>
+      {{/each}}
+    {{else}}
+      <h2>Let's add some blogs!</h2>
+    {{/if}}
+  </ul>
 
+{{new-blog save="save"}}
 </div>
-
 
 {{outlet}}

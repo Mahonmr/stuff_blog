@@ -4,6 +4,8 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'bike-blog',
     environment: environment,
+    contentSecurityPolicy: { 'connect-src': "'self' https://auth.firebase.com wss://*.firebaseio.com" },
+    firebase: 'https://crackling-heat-2521.firebaseIO.com/',
     baseURL: '/',
     locationType: 'auto',
     EmberENV: {

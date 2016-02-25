@@ -1,0 +1,24 @@
+{{#if addNewBlog}}
+  <h1>New Rental</h1>
+  <div>
+    <form>
+      <div class="form-group">
+        <label>Subject</label>
+        {{input value=subject id="subject"}}
+      </div>
+
+      <div class="form-group">
+        <label>Blog</label>
+        {{input value=content id="contentf"}}
+      </div>
+
+      <div class="form-group">
+        <label>Image (optional)</label>
+        {{input value=image id="image"}}
+      </div>
+      <button {{action 'save'}}>Save</button>
+    </form>
+  </div>
+{{else}}
+  <button {{action 'blogFormShow'}}>New Blog</button>
+{{/if}}
