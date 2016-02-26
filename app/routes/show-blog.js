@@ -1,21 +1,26 @@
+import Ember from 'ember';
+
 export default Ember.Route.extend({
+  showCommentForm: false,
   model(params) {
-    return this.store.findRecord('blog', params.blog_id);
+    return Ember.RSVP.hash({
+      blog: this.store.findRecord('blog', params.blog_id),
+      comment: this.store.findAll('comment')
+    });
   },
-  // actions: {
-  //   update(blog, params) {
-  //     Object.keys(params).forEach(function(key) {
-  //       if(params[key]!==undefined) {
-  //         blog.set(key,params[key]);
-  //       }
-  //     });
-  //     blog.save();
-  //     this.transitionTo('index');
-  //   },
-  //
-  //   delete(blog) {
-  //     blog.destroyRecord();
-  //     this.transitionTo('index');
-  //   }
-  // }
+  actions: {
+    commentShow: function() {
+      this.set('showCommentForm', true);
+    },
+
+    submitComment(params) {
+      var newComment = this.store.createRecord('comment', params);
+      var blog = params.blog;
+      blog.get('comments').addObject(newComment);
+      newComment.save().then(function() {
+        return blog.save();
+      });
+      this.transitionTo('index');
+    },
+  }
 });
